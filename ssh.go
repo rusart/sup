@@ -139,9 +139,7 @@ func (c *SSHClient) ConnectWith(host string, dialer SSHDialFunc) error {
 		Auth: []ssh.AuthMethod{
 			authMethod,
 		},
-		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
-			return nil
-		},
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
 	c.conn, err = dialer("tcp", c.host, config)
